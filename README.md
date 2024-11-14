@@ -6,14 +6,14 @@
 
 # Dokumentasi API untuk Aplikasi Manajemen Inventaris
 
-### Spesifikasi Aplikasi
+### 📄 **Spesifikasi Aplikasi**
 Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknologi berikut:
 - **Backend Framework**: Node.js dengan Express.js
 - **ORM**: Prisma
 - **Database**: PostgreSQL
 - **Containerization**: Docker Compose untuk mempermudah proses pengembangan dan deployment.
 
-### Persiapan dan Instalasi
+### 🔧 **Persiapan dan Instalasi**
 1. **Clone repository**:
    ```bash
    git clone <repository-url>
@@ -36,7 +36,7 @@ Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknol
    JWT_SECRET=<your_jwt_secret>
    ```
 
-### Urutan Flow Aplikasi dari Login
+### 🔑 **Urutan Flow Aplikasi dari Login**
 1. **User mengakses halaman login**.
 2. **User mengisi form login** dengan `username` dan `password`.
 3. **Request dikirim ke endpoint login**:
@@ -55,7 +55,7 @@ Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknol
 5. **Jika valid**, server mengembalikan token JWT sebagai respons.
 6. **User menyimpan token JWT** untuk digunakan dalam permintaan API selanjutnya.
 
-### Penggunaan File untuk Pengujian
+### 🛠️ **Penggunaan File untuk Pengujian**
 Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk login dan register, setelah login akan mendapatkan token. Paste-kan token di dalam authorization `ITEM.http` untuk menguji endpoint terkait manajemen barang. File-file ini dapat digunakan dengan tools seperti **Postman** atau **VS Code dengan extension HTTP**.
 
 #### 1. **AUTH.http** (Login dan Register)
@@ -165,7 +165,7 @@ Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk lo
      Authorization: Bearer <token>
      ```
 
-### Penjelasan Singkat Fitur Aplikasi
+### ⚙️ **Penjelasan Singkat Fitur Aplikasi**
 - **Manajemen Barang**: CRUD item dengan validasi data.
 - **Ringkasan Stok**: Melihat total stok, nilai stok, dan rata-rata harga.
 - **Filter Stok**: Melihat barang dengan stok kurang dari, sama dengan, atau lebih dari ambang batas tertentu.
@@ -174,9 +174,8 @@ Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk lo
 
 Pastikan API berjalan di port `3001` seperti yang disetel dalam Docker Compose, atau sesuaikan dengan konfigurasi Anda.
 
-### Teknologi yang Digunakan:
+### 🚀 **Teknologi yang Digunakan:**
 Aplikasi ini dibangun menggunakan **Node.js** dengan **Express.js** sebagai backend framework untuk menangani routing dan middleware. **Prisma** digunakan sebagai ORM untuk mempermudah interaksi dengan **PostgreSQL** sebagai database relasional. Seluruh aplikasi dijalankan menggunakan **Docker Compose** untuk containerization, yang mempermudah proses pengembangan dan deployment dengan memastikan bahwa semua layanan (aplikasi dan database) dapat berjalan di lingkungan yang konsisten.
 
 ---
 
-Dengan pembaruan ini, README.md sekarang memberikan penjelasan lengkap mengenai teknologi yang digunakan dan cara menjalankan aplikasi menggunakan Docker Compose.
