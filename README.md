@@ -54,7 +54,7 @@ Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknol
 6. **User menyimpan token JWT** untuk digunakan dalam permintaan API selanjutnya.
 
 ### Penggunaan File untuk Pengujian
-Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk login dan register, serta `ITEM.http` untuk menguji endpoint terkait manajemen barang. File-file ini dapat digunakan dengan tools seperti **Postman** atau **VS Code dengan extension HTTP**.
+Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk login dan register, setelah login akan mendapatkan token. Paste-kan token di dalam authorization `ITEM.http` untuk menguji endpoint terkait manajemen barang. File-file ini dapat digunakan dengan tools seperti **Postman** atau **VS Code dengan extension HTTP**.
 
 #### 1. **AUTH.http** (Login dan Register)
    - Gunakan file ini untuk menguji proses login dan register.
