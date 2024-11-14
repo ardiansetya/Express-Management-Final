@@ -1,0 +1,71 @@
+# Testing item creation and retrieval
+
+# CREATE ITEMS (JIKA MEMBUAT ITEM LEBIH DARI 1, NAMA TIDAK BOLEH SAMA
+POST http://localhost:3001/api/items
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+{
+  "name": "MACBOOK AIR",
+  "description": "Ini Laptop",
+  "price": 50000.00,
+  "quantity": 5,
+  "categoryId": 1,
+  "supplierId": 1,
+  "createdBy": 1
+}
+
+###
+
+# GET iTEMS
+GET http://localhost:3001/api/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+# Menampilkan ringkasan stok barang termasuk stok total, total nilai stok (harga x jumlah), dan rata-rata harga barang. 
+GET http://localhost:3001/api/items/summary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+### 
+
+#Menampilkan daftar barang yang stoknya di bawah ambang batas tertentu (misalkan di bawah 5 unit), menggunakan condition
+
+#dibawah 5
+GET http://localhost:3001/api/items/low-stock?condition=lessThan&threshold=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+#sama dengan 5
+GET http://localhost:3001/api/items/low-stock?condition=equalTo&threshold=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+#lebih dari 5
+GET http://localhost:3001/api/items/low-stock?condition=greaterThan&threshold=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+
+# Menampilkan laporan barang berdasarkan kategori tertentu. 
+GET http://localhost:3001/api/items/category/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+# Menampilkan ringkasan per kategori, termasuk jumlah barang per kategori, total 
+# nilai stok tiap kategori, dan rata-rata harga barang dalam kategori tersebut.
+GET http://localhost:3001/api/items/category-summary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###
+
+#Menampilkan ringkasan barang yang disuplai oleh masing-masing pemasok, termasuk jumlah barang per pemasok dan total nilai barang yang disuplai.
+
+GET http://localhost:3001/api/items/supplier-summary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzMxNTgxNDE2LCJleHAiOjE3MzE1ODUwMTZ9.h-T9luNfgAvq_9zYa3QId-gbuDM-ozrpkhGWl6runxw
+
+###

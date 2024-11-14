@@ -1,0 +1,29 @@
+# Testing admin creation and retrieval
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "username": "ardian",
+  "password": "123123",
+  "email": "ardian@example.com"
+}
+
+
+###
+
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "username": "ardian",
+  "password": "123123",
+  "email": "ardian@example.com"
+}
+
+###
+
+# get all admin
+GET http://localhost:3001/api/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMxNTg5NjczLCJleHAiOjE3MzE1OTMyNzN9.QgEMzNHuZEzU9gCmz3Zr-Hn05GRB1vcoSBJ55SBrR-o
+
+###

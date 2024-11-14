@@ -1,0 +1,68 @@
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows", "linux-musl-openssl-3.0.x"]
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relasi (1-to-many)
+  createdCategories Category[] @relation("AdminCategories")
+  createdSuppliers  Supplier[] @relation("AdminSuppliers")
+  createdItems      Item[]     @relation("AdminItems")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  createdBy   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relasi (1-to-many)
+  items     Item[]   @relation("CategoryItems")
+  admin     Admin    @relation("AdminCategories", fields: [createdBy], references: [id])
+}
+
+model Supplier {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  contactInfo String
+  createdBy  Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relasi (1-to-many)
+  items      Item[]   @relation("SupplierItems")
+  admin      Admin    @relation("AdminSuppliers", fields: [createdBy], references: [id])
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  quantity    Int
+  categoryId  Int
+  supplierId  Int
+  createdBy   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relasi (many-to-1)
+  category    Category @relation("CategoryItems", fields: [categoryId], references: [id])
+  supplier    Supplier @relation("SupplierItems", fields: [supplierId], references: [id])
+  admin       Admin    @relation("AdminItems", fields: [createdBy], references: [id])
+}
