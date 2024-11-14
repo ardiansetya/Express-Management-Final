@@ -1,4 +1,4 @@
-Berikut adalah pembaruan dokumentasi dengan langkah tambahan untuk menjalankan migrasi Prisma setelah menjalankan Docker Compose:
+Berikut adalah pembaruan dokumentasi dengan tambahan informasi mengenai penggunaan file `AUTH.http` untuk login/register dan `ITEM.http` untuk pengujian endpoint lainnya:
 
 ---
 
@@ -53,137 +53,115 @@ Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknol
 5. **Jika valid**, server mengembalikan token JWT sebagai respons.
 6. **User menyimpan token JWT** untuk digunakan dalam permintaan API selanjutnya.
 
-### Workflow Aplikasi (Revised)
-Sebelum membuat item, Anda perlu membuat kategori dan pemasok terlebih dahulu. Berikut adalah urutan alur kerja yang harus diikuti:
+### Penggunaan File untuk Pengujian
+Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk login dan register, serta `ITEM.http` untuk menguji endpoint terkait manajemen barang. File-file ini dapat digunakan dengan tools seperti **Postman** atau **VS Code dengan extension HTTP**.
 
-1. **Membuat Kategori**:
-   - Endpoint ini digunakan untuk membuat kategori produk baru.
-   - **Path**: `POST /api/categories`
-   
-2. **Membuat Pemasok**:
-   - Endpoint ini digunakan untuk membuat pemasok baru.
-   - **Path**: `POST /api/suppliers`
+#### 1. **AUTH.http** (Login dan Register)
+   - Gunakan file ini untuk menguji proses login dan register.
+   - **Login**:
+     ```http
+     POST http://localhost:3001/auth/login
+     Content-Type: application/json
 
-3. **Membuat Item Baru**:
-   - Setelah kategori dan pemasok dibuat, Anda dapat membuat item baru.
-   - **Path**: `POST /api/items`
+     {
+       "username": "jhondoe",
+       "password": "securePassword123",
+       "email": "jhondoe@example.com"
+     }
+     ```
 
-### Endpoint dan Contoh Request
-Berikut adalah daftar endpoint API beserta contoh request menggunakan format HTTP:
+   - **Register**:
+     ```http
+     POST http://localhost:3001/auth/register
+     Content-Type: application/json
 
-#### 1. Membuat Kategori Baru
-**Path**: `POST /api/categories`
-```http
-POST http://localhost:3001/api/categories
-Content-Type: application/json
-Authorization: Bearer <token>
+     {
+       "username": "jhondoe",
+       "password": "securePassword123",
+       "email": "jhondoe@example.com"
+     }
+     ```
 
-{
-  "name": "Elektronik",
-  "description": "Kategori untuk barang elektronik"
-}
-```
+#### 2. **ITEM.http** (Endpoint untuk Manajemen Barang)
+   Gunakan file ini untuk menguji berbagai endpoint yang terkait dengan manajemen item, seperti membuat item, mendapatkan daftar item, melihat ringkasan stok, dan lainnya.
 
-#### 2. Membuat Pemasok Baru
-**Path**: `POST /api/suppliers`
-```http
-POST http://localhost:3001/api/suppliers
-Content-Type: application/json
-Authorization: Bearer <token>
+   - **Membuat Kategori Baru**:
+     ```http
+     POST http://localhost:3001/api/categories
+     Content-Type: application/json
+     Authorization: Bearer <token>
 
-{
-  "name": "ABC Supplier",
-  "contact": "contact@abc-supplier.com",
-  "address": "Jl. ABC No. 123"
-}
-```
+     {
+       "name": "Elektronik",
+       "description": "Kategori untuk barang elektronik"
+     }
+     ```
 
-#### 3. Membuat Item Baru
-**Path**: `POST /api/items`
-```http
-POST http://localhost:3001/api/items
-Content-Type: application/json
-Authorization: Bearer <token>
+   - **Membuat Pemasok Baru**:
+     ```http
+     POST http://localhost:3001/api/suppliers
+     Content-Type: application/json
+     Authorization: Bearer <token>
 
-{
-  "name": "MACBOOK AIR",
-  "description": "Ini Laptop",
-  "price": 50000.00,
-  "quantity": 5,
-  "categoryId": 1,
-  "supplierId": 1,
-  "createdBy": 1
-}
-```
+     {
+       "name": "ABC Supplier",
+       "contact": "contact@abc-supplier.com",
+       "address": "Jl. ABC No. 123"
+     }
+     ```
 
-#### 4. Mendapatkan Semua Item
-**Path**: `GET /api/items`
-```http
-GET http://localhost:3001/api/items
-Authorization: Bearer <token>
-```
+   - **Membuat Item Baru**:
+     ```http
+     POST http://localhost:3001/api/items
+     Content-Type: application/json
+     Authorization: Bearer <token>
 
-#### 5. Menampilkan Ringkasan Stok Barang
-**Path**: `GET /api/items/summary`
-```http
-GET http://localhost:3001/api/items/summary
-Authorization: Bearer <token>
-```
+     {
+       "name": "MACBOOK AIR",
+       "description": "Ini Laptop",
+       "price": 50000.00,
+       "quantity": 5,
+       "categoryId": 1,
+       "supplierId": 1,
+       "createdBy": 1
+     }
+     ```
 
-#### 6. Menampilkan Barang dengan Stok di Bawah Ambang Batas
-**Path**: `GET /api/items/low-stock`
-- **Parameter query**: `condition` (lessThan, equalTo, greaterThan), `threshold` (default: 5)
-```http
-GET http://localhost:3001/api/items/low-stock?condition=lessThan&threshold=5
-Authorization: Bearer <token>
-```
+   - **Mendapatkan Semua Item**:
+     ```http
+     GET http://localhost:3001/api/items
+     Authorization: Bearer <token>
+     ```
 
-#### 7. Menampilkan Barang Berdasarkan Kategori
-**Path**: `GET /api/items/category/:categoryId`
-```http
-GET http://localhost:3001/api/items/category/1
-Authorization: Bearer <token>
-```
+   - **Menampilkan Ringkasan Stok Barang**:
+     ```http
+     GET http://localhost:3001/api/items/summary
+     Authorization: Bearer <token>
+     ```
 
-#### 8. Menampilkan Ringkasan Per Kategori
-**Path**: `GET /api/items/category-summary`
-```http
-GET http://localhost:3001/api/items/category-summary
-Authorization: Bearer <token>
-```
+   - **Menampilkan Barang dengan Stok di Bawah Ambang Batas**:
+     ```http
+     GET http://localhost:3001/api/items/low-stock?condition=lessThan&threshold=5
+     Authorization: Bearer <token>
+     ```
 
-#### 9. Menampilkan Ringkasan Barang Berdasarkan Pemasok
-**Path**: `GET /api/items/supplier-summary`
-```http
-GET http://localhost:3001/api/items/supplier-summary
-Authorization: Bearer <token>
-```
+   - **Menampilkan Barang Berdasarkan Kategori**:
+     ```http
+     GET http://localhost:3001/api/items/category/1
+     Authorization: Bearer <token>
+     ```
 
-#### 10. Membuat Akun Admin Baru
-**Path**: `POST /auth/register`
-```http
-POST http://localhost:3001/auth/register
-Content-Type: application/json
+   - **Menampilkan Ringkasan Per Kategori**:
+     ```http
+     GET http://localhost:3001/api/items/category-summary
+     Authorization: Bearer <token>
+     ```
 
-{
-  "username": "jhondoe",
-  "password": "securePassword123",
-  "email": "jhondoe@example.com"
-}
-```
-
-#### 11. Login Admin
-**Path**: `POST /auth/login`
-```http
-POST http://localhost:3001/auth/login
-Content-Type: application/json
-
-{
-  "username": "jhondoe",
-  "password": "securePassword123",
-  "email": "jhondoe@example.com"
-}
-```
+   - **Menampilkan Ringkasan Barang Berdasarkan Pemasok**:
+     ```http
+     GET http://localhost:3001/api/items/supplier-summary
+     Authorization: Bearer <token>
+     ```
 
 ### Penjelasan Singkat Fitur Aplikasi
 - **Manajemen Barang**: CRUD item dengan validasi data.
@@ -196,4 +174,4 @@ Pastikan API berjalan di port `3001` seperti yang disetel dalam Docker Compose, 
 
 ---
 
-Dengan penambahan langkah `docker-compose exec app npx prisma migrate dev`, Anda memastikan bahwa database sudah siap untuk digunakan setelah menjalankan aplikasi.
+Dengan penambahan informasi tentang penggunaan file `AUTH.http` dan `ITEM.http`, pengujian dan penggunaan API menjadi lebih terstruktur dan mudah diikuti.
