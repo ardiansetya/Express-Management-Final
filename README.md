@@ -1,8 +1,14 @@
+NAMA: ARDIAN SETYA PRADANA
+NIM: A11.2022.14596
+UTS PEMROGRAMMAN SISI SERVER (BACKEND)
+
+---
+
 # Dokumentasi API untuk Aplikasi Manajemen Inventaris
 
 ### Spesifikasi Aplikasi
 Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknologi berikut:
-- **Backend Framework**: Express.js
+- **Backend Framework**: Node.js dengan Express.js
 - **ORM**: Prisma
 - **Database**: PostgreSQL
 - **Containerization**: Docker Compose untuk mempermudah proses pengembangan dan deployment.
@@ -168,6 +174,9 @@ Untuk memudahkan pengujian API, Anda dapat menggunakan file `AUTH.http` untuk lo
 
 Pastikan API berjalan di port `3001` seperti yang disetel dalam Docker Compose, atau sesuaikan dengan konfigurasi Anda.
 
+### Teknologi yang Digunakan:
+Aplikasi ini dibangun menggunakan **Node.js** dengan **Express.js** sebagai backend framework untuk menangani routing dan middleware. **Prisma** digunakan sebagai ORM untuk mempermudah interaksi dengan **PostgreSQL** sebagai database relasional. Seluruh aplikasi dijalankan menggunakan **Docker Compose** untuk containerization, yang mempermudah proses pengembangan dan deployment dengan memastikan bahwa semua layanan (aplikasi dan database) dapat berjalan di lingkungan yang konsisten.
+
 ---
 
-Dengan penambahan informasi tentang penggunaan file `AUTH.http` dan `ITEM.http`, pengujian dan penggunaan API menjadi lebih terstruktur dan mudah diikuti.
+Dengan pembaruan ini, README.md sekarang memberikan penjelasan lengkap mengenai teknologi yang digunakan dan cara menjalankan aplikasi menggunakan Docker Compose.
