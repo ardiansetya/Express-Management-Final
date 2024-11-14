@@ -1,7 +1,3 @@
-Berikut adalah pembaruan dokumentasi dengan tambahan informasi mengenai penggunaan file `AUTH.http` untuk login/register dan `ITEM.http` untuk pengujian endpoint lainnya:
-
----
-
 # Dokumentasi API untuk Aplikasi Manajemen Inventaris
 
 ### Spesifikasi Aplikasi
