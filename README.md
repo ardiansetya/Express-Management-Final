@@ -4,7 +4,7 @@
 
 ---
 
-# Dokumentasi API untuk Aplikasi Manajemen Inventaris Express Js
+# Dokumentasi API untuk Aplikasi Manajemen Inventaris
 
 ### 📄 **Spesifikasi Aplikasi**
 Aplikasi ini adalah sistem manajemen inventaris yang dibangun menggunakan teknologi berikut:
